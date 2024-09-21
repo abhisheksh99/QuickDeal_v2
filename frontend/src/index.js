@@ -5,6 +5,7 @@ import "./assets/styles/bootstrap.custom.css";
 import App from "./App";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
+import ProductScreen from "./screens/ProductScreen";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,6 +14,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route index={true} path="/" element={<HomeScreen />} />
+          <Route  path="/products/:id" element={<ProductScreen />} />
         </Route>
       </Routes>
     </Router>
