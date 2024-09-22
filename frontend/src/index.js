@@ -9,6 +9,7 @@ import ProductScreen from "./screens/ProductScreen";
 import CartScreen from "./screens/CartScreen";
 import store from "./store/store";
 import { Provider } from "react-redux";
+import LoginScreen from "./screens/LoginScreen";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -20,6 +21,7 @@ root.render(
             <Route index={true} path="/" element={<HomeScreen />} />
             <Route path="/products/:id" element={<ProductScreen />} />
             <Route path="/cart" element={<CartScreen />} />
+            <Route path="/login" element={<LoginScreen />} />
           </Route>
         </Routes>
       </Router>
