@@ -6,17 +6,21 @@ import App from "./App";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
+import store from "./store/store";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index={true} path="/" element={<HomeScreen />} />
-          <Route  path="/products/:id" element={<ProductScreen />} />
-        </Route>
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index={true} path="/" element={<HomeScreen />} />
+            <Route path="/products/:id" element={<ProductScreen />} />
+          </Route>
+        </Routes>
+      </Router>
+    </Provider>
   </React.StrictMode>
 );
