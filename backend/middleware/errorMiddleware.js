@@ -8,8 +8,8 @@ const notFound = (req, res, next) => {
     let statusCode = res.statusCode === 200 ? 500 : res.statusCode
     let message = err.message
   
-    // NOTE: checking for invalid ObjectId moved to it's own middleware
-    // See README for further info.
+    // checking for invalid ObjectId moved to it's own middleware
+    
   
     res.status(statusCode).json({
       message: message,

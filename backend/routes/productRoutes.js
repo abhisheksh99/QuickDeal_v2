@@ -6,8 +6,8 @@ import { getAllProducts, getProductById } from "../controllers/productController
 const router = express.Router()
 
 
-router.get("/",getAllProducts)
-router.get("/:id",getProductById)
+router.route("/").get(getAllProducts)
+router.route("/:id").get(getProductById)
 
 
 
