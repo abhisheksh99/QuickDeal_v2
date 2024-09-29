@@ -34,12 +34,16 @@ const cartSlice = createSlice({
     saveShippingAddress: (state, action) => {
       state.shippingAddress = action.payload;
       return updateCart(state);
+    },
+    savePaymentMethod : (state,action) => {
+      state.paymentMethod = action.payload
+      return updateCart(state)
     }
   }
 });
 
 // Export the actions
-export const { addToCart, removeFromCart, saveShippingAddress } = cartSlice.actions;
+export const { addToCart, removeFromCart, saveShippingAddress, savePaymentMethod } = cartSlice.actions;
 
 // Export the reducer
 export default cartSlice.reducer;
