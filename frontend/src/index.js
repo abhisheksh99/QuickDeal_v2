@@ -11,6 +11,8 @@ import store from "./store/store";
 import { Provider } from "react-redux";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import ShippingScreen from "./screens/ShippingScreen";
+import PrivateRoute from "./components/PrivateRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -24,6 +26,10 @@ root.render(
             <Route path="/cart" element={<CartScreen />} />
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
+            {/* Private Route for the shipping path */}
+            <Route path="" element={<PrivateRoute />}>
+              <Route path="/shipping" element={<ShippingScreen />} />
+            </Route>
           </Route>
         </Routes>
       </Router>

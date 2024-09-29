@@ -1,44 +1,45 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { updateCart } from "../utils/cartUtils"
+import { createSlice } from "@reduxjs/toolkit";
+import { updateCart } from "../utils/cartUtils";
 
 // Initial state: Load cart from localStorage or set default
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
-  : { cartItems: [] }
-
+  : { cartItems: [], shippingAddress: {}, paymentMethod: "PayPal" };
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart: (state, action) => { // reducers take state and action, for now state = initial state and action is the data
-      const item = action.payload // assigning data to a variable item
+    addToCart: (state, action) => {
+      const item = action.payload;
 
-      // checking if item already exists
-      const existItem = state.cartItems.find((x) => x._id === item._id)
+      // Check if the item already exists in the cart
+      const existItem = state.cartItems.find((x) => x._id === item._id);
 
-      // mainly if item exists we want to update its qty
       if (existItem) {
         state.cartItems = state.cartItems.map((x) =>
           x._id === existItem._id ? item : x
-        )
+        );
       } else {
-        state.cartItems = [...state.cartItems, item]
+        state.cartItems = [...state.cartItems, item];
       }
 
-      return updateCart(state)
-
-      
+      return updateCart(state);
     },
-    removeFromCart: (state,action) =>{
-        state.cartItems = state.cartItems.filter((x) => x._id!==action.payload)
-        return updateCart(state)
+    removeFromCart: (state, action) => {
+      state.cartItems = state.cartItems.filter((x) => x._id !== action.payload);
+      return updateCart(state);
+    },
+   
+    saveShippingAddress: (state, action) => {
+      state.shippingAddress = action.payload;
+      return updateCart(state);
     }
-  },
-})
+  }
+});
 
-// Export the addToCart action
-export const { addToCart, removeFromCart } = cartSlice.actions
+// Export the actions
+export const { addToCart, removeFromCart, saveShippingAddress } = cartSlice.actions;
 
 // Export the reducer
-export default cartSlice.reducer
+export default cartSlice.reducer;
