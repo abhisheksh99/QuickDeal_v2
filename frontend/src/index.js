@@ -13,11 +13,14 @@ import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import ShippingScreen from "./screens/ShippingScreen";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminRoute from "./components/AdminRoute";
 import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
 import {PayPalScriptProvider} from "@paypal/react-paypal-js"
 import ProfileScreen from "./screens/ProfileScreen";
+import OrderListScreen from "./screens/admins/OrderListScreen";
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -39,6 +42,11 @@ root.render(
               <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route path="/order/:id" element={<OrderScreen />} />
               <Route path="/profile" element={<ProfileScreen />} />
+            </Route>
+
+            <Route path="" element={<AdminRoute />}>
+              <Route path="/admin/orderlist" element={<OrderListScreen />} />
+              
             </Route>
           </Route>
         </Routes>
