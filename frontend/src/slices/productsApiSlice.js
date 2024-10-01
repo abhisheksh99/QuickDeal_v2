@@ -15,6 +15,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
                 url: `/api/products/${id}`,
                 method: "GET"
             }),
+           
             keepUnusedDataFor: 5 // caching
         }),
         createProduct: builder.mutation({
@@ -30,7 +31,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
                 method: "PUT",
                 body: data
             }),
-            invalidatesTags: ["Products"]  // this will stop it from being cached so that we will have fresh data
+            invalidatesTags: ["Product"]  // this will stop it from being cached so that we will have fresh data
         }),
         uploadProductImage: builder.mutation({
             query: (data) => ({
@@ -44,7 +45,17 @@ export const productsApiSlice = apiSlice.injectEndpoints({
                 url: `/api/products/${id}`,
                 method: "DELETE"
             }),
-            invalidatesTags: ["Products"]  // Add this to invalidate the cache after deletion
+            invalidatesTags: ["Product"]  // Add this to invalidate the cache after deletion
+        }),
+        createReview: builder.mutation({
+            query: (data) => ({
+                url: `/api/products/${data._id}/reviews`,
+                method: "POST",
+                body: data,
+
+            }),
+            
+            invalidatesTags: ["Product"]
         })
     })
 })
@@ -55,5 +66,6 @@ export const {
     useCreateProductMutation,
     useUpdateProductMutation,
     useUploadProductImageMutation,
-    useDeleteProductMutation
+    useDeleteProductMutation,
+    useCreateReviewMutation
 } = productsApiSlice
