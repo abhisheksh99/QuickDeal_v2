@@ -18,7 +18,7 @@ const reviewScehma = mongoose.Schema({
         required:true,
         default:0
     },
-    commnet:{
+    comment:{
         type:String,
         required:true
     },

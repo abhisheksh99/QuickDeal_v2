@@ -1,7 +1,9 @@
+/* Main content */
 main {
   min-height: 80vh;
 }
 
+/* Rating styles */
 .rating span {
   margin: 0.1rem;
 }
@@ -10,24 +12,28 @@ main {
   color: #f8e825;
 }
 
+/* Rating text */
 .rating-text {
   font-size: 0.8rem;
   font-weight: 600;
   padding-left: 0.5rem;
 }
 
+/* Product title styles */
 .product-title {
-  height: 2.5em; /* Set a fixed height */
+  height: 2.5em; /* Fixed height */
   overflow: hidden; /* Hide overflow content */
   text-overflow: ellipsis; /* Add ellipsis for long text */
   white-space: nowrap; /* Prevent wrapping */
 }
 
+/* Table alignment */
 table td,
 table th {
   text-align: center;
 }
 
+/* Review section */
 .review {
   margin-top: 30px;
 }
@@ -39,15 +45,53 @@ table th {
   border: 1px solid #ddd;
 }
 
+/* Review button */
 .review button {
   margin-top: 10px;
 }
 
+/* Carousel styles */
+.carousel {
+  position: relative;
+}
+
 .carousel-caption {
   position: absolute;
-  width: 100%;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  padding: 20px; /* Added padding */
+  background: rgba(0, 0, 0, 0.6); /* Darker background for better text visibility */
+  color: #fff; /* White text color */
+  text-align: right; /* Align text to the right */
+  transition: background 0.3s; /* Smooth transition for background */
+}
+
+.carousel-caption h2 {
+  font-size: 1.5rem; /* Larger font size */
+  font-weight: bold; /* Make text bold */
+  margin: 0; /* Remove default margin */
+}
+
+/* Image styling */
+.carousel-item img {
+  max-height: 500px; /* Set max height for images */
+  object-fit: cover; /* Maintain aspect ratio while filling the container */
+  border-radius: 5px; /* Add rounded corners */
+}
+
+/* Hover effect for the carousel */
+.carousel-item:hover .carousel-caption {
+  background: rgba(0, 0, 0, 0.8); /* Darken the background on hover */
+}
+
+/* Additional styles for responsiveness */
+@media (max-width: 768px) {
+  .carousel-caption h2 {
+    font-size: 1.2rem; /* Adjust font size for smaller screens */
+  }
+
+  .carousel-item img {
+    max-height: 300px; /* Adjust image height for smaller screens */
+  }
 }
