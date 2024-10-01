@@ -21,6 +21,7 @@ import {PayPalScriptProvider} from "@paypal/react-paypal-js"
 import ProfileScreen from "./screens/ProfileScreen";
 import OrderListScreen from "./screens/admins/OrderListScreen";
 import ProductListScreen from "./screens/admins/ProductListScreen";
+import ProductEditScreen from "./screens/admins/ProductEditScreen";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -48,6 +49,7 @@ root.render(
             <Route path="" element={<AdminRoute />}>
               <Route path="/admin/orderlist" element={<OrderListScreen />} />
               <Route path="/admin/productlist" element={<ProductListScreen />} />
+              <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
               
             </Route>
           </Route>

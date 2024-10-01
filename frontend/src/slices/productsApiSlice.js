@@ -8,6 +8,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
                 url: "/api/products",
                  method: 'GET'
             }),
+            providesTags : ["Products"], // done so that we dont need to refresh the page
             keepUnusedDataFor:5, // caching
         }),
         getProductById: builder.query({
@@ -26,6 +27,14 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 
             }),
             invalidatesTags :["Products"],  // this will stop it from being cached so that we will have fresh data
+        }),
+        updateProduct : builder.mutation({
+            query: (data) => ({
+                url: `/api/products/${data._id}`,
+                method: "PUT",
+                body:data
+            }),
+            invalidatesTags :["Products"],  // this will stop it from being cached so that we will have fresh data
         })
         
     })
@@ -33,4 +42,4 @@ export const productsApiSlice = apiSlice.injectEndpoints({
 
 
 
-export const {useGetProductsQuery, useGetProductByIdQuery, useCreateProductMutation} = productsApiSlice
+export const {useGetProductsQuery, useGetProductByIdQuery, useCreateProductMutation ,useUpdateProductMutation} = productsApiSlice
