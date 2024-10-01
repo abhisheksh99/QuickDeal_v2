@@ -4,16 +4,24 @@ import { FaEdit, FaTrash, FaPlus } from "react-icons/fa"
 import { Link } from "react-router-dom"
 import Message from "../../components/Message"
 import Loader from "../../components/Loader"
-import { useGetProductsQuery, useCreateProductMutation } from "../../slices/productsApiSlice"
+import { useGetProductsQuery, useCreateProductMutation, useDeleteProductMutation } from "../../slices/productsApiSlice"
 import { toast } from "react-toastify"
 
 const ProductListScreen = () => {
   const { data: products, isLoading, error, refetch } = useGetProductsQuery()
   const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation()
+  const [deleteProduct, { isLoading: loadingDelete }] = useDeleteProductMutation()
 
   const deleteHandler = async (id) => {
-    console.log("Deleting product with id:", id)
-    // Implement delete functionality here
+    if (window.confirm("Are you sure you want to delete this Product?")) {
+      try {
+        await deleteProduct(id)
+        refetch()
+        toast.success("Product deleted successfully")
+      } catch (err) {
+        toast.error(err?.data?.message || err.error)
+      }
+    }
   }
 
   const createProductHandler = async () => {
@@ -42,6 +50,7 @@ const ProductListScreen = () => {
       </Row>
 
       {loadingCreate && <Loader />}
+      {loadingDelete && <Loader />}
       {isLoading ? (
         <Loader />
       ) : error ? (
