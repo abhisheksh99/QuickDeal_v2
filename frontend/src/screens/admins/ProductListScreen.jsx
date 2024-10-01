@@ -1,32 +1,32 @@
-import { LinkContainer } from "react-router-bootstrap";
-import { Table, Button, Row, Col } from "react-bootstrap";
-import { FaEdit, FaTrash, FaPlus } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import Message from "../../components/Message";
-import Loader from "../../components/Loader";
-import { useGetProductsQuery, useCreateProductMutation } from "../../slices/productsApiSlice";
-import { toast } from "react-toastify";
+import { LinkContainer } from "react-router-bootstrap"
+import { Table, Button, Row, Col } from "react-bootstrap"
+import { FaEdit, FaTrash, FaPlus } from "react-icons/fa"
+import { Link } from "react-router-dom"
+import Message from "../../components/Message"
+import Loader from "../../components/Loader"
+import { useGetProductsQuery, useCreateProductMutation } from "../../slices/productsApiSlice"
+import { toast } from "react-toastify"
 
 const ProductListScreen = () => {
-  const { data: products, isLoading, error, refetch } = useGetProductsQuery();
-  const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation();
+  const { data: products, isLoading, error, refetch } = useGetProductsQuery()
+  const [createProduct, { isLoading: loadingCreate }] = useCreateProductMutation()
 
   const deleteHandler = async (id) => {
-    console.log("Deleting product with id:", id);
+    console.log("Deleting product with id:", id)
     // Implement delete functionality here
-  };
+  }
 
   const createProductHandler = async () => {
     if (window.confirm("Are you sure you want to create a new Product?")) {
       try {
-        await createProduct();
-        refetch();
-        toast.success("Product created successfully");
+        await createProduct()
+        refetch()
+        toast.success("Product created successfully")
       } catch (err) {
-        toast.error(err?.data?.message || err.error);
+        toast.error(err?.data?.message || err.error)
       }
     }
-  };
+  }
 
   return (
     <>
@@ -91,7 +91,7 @@ const ProductListScreen = () => {
         </>
       )}
     </>
-  );
-};
+  )
+}
 
-export default ProductListScreen;
+export default ProductListScreen
