@@ -4,16 +4,37 @@ import asyncHandler from "express-async-handler"
 // @desc    Fetch all products
 // @route   GET /api/products
 // @access  Public
+// Export function to get all products with pagination
 export const getAllProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({})
+  const pageSize = 5 // Number of products per page
+  const page = Number(req.query.pageNumber) || 1 // Current page number
+
+  // Create keyword object for search functionality
+  const keyword = req.query.keyword 
+    ? { name: { $regex: req.query.keyword, $options: "i" } } 
+    : {}
+  
+  // Count total products matching the keyword
+  const count = await Product.countDocuments({...keyword})
+
+  // Fetch products with pagination and keyword filter
+  const products = await Product.find({...keyword})
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+
   if (products) {
-    res.status(200).json(products)
+    // Respond with products, current page, and total pages
+    res.status(200).json({
+      products,
+      page,
+      pages: Math.ceil(count / pageSize),
+    })
   } else {
+    // Handle case where no products are found
     res.status(404)
     throw new Error("Products not found")
   }
 })
-
 // @desc    Fetch single product by ID
 // @route   GET /api/products/:id
 // @access  Public
@@ -111,7 +132,7 @@ export const createProductReview = asyncHandler(async (req, res) => {
     const alreadyReviewed = product.reviews.find( (review) => review.user.toString() === req.user._id.toString())
     if(alreadyReviewed){
       res.status(400)
-      throw new Error("Product alredy reviewed");
+      throw new Error("Product alredy reviewed")
       
     }
 
