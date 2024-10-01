@@ -3,11 +3,12 @@ import { apiSlice } from "./apiSlice"
 export const productsApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         getProducts: builder.query({
-            query: ({pageNumber}) => ({
+            query: ({pageNumber, keyword}) => ({
                 url: "/api/products",
                 method: 'GET',
                 params:{
                     pageNumber,
+                    keyword,
                 },
             }),
             providesTags: ["Products"], // done so that we dont need to refresh the page
