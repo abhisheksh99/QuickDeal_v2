@@ -9,6 +9,7 @@ import Paginate from "../components/Paginate.jsx"
 import { Link } from 'react-router-dom'
 import ProductCarousel from '../components/ProductCarousel.jsx'
 
+
 const HomeScreen = () => {
   const {pageNumber,keyword} = useParams()
   const { data, isLoading, isError, error } = useGetProductsQuery({pageNumber,keyword})
